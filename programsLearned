@@ -1,0 +1,412 @@
+public class Homework0
+{
+    public static void main(String[] args)
+    {
+        java.util.Properties props = System.getProperties();
+        System.out.println("OS: " + props.get("os.name") 
+            + " " + props.get("os.version"));
+        System.out.println("Java: " + props.get("java.vendor") 
+            + " " + props.get("java.version"));
+        String classpath = "" + props.get("java.class.path");
+        String ide;
+        if (classpath.contains("bluej"))
+            ide = "BlueJ";
+        else if (props.get("com.horstmann.codecheck") != null)
+            ide = "Udacity";
+        else 
+            ide = "Unknown";
+        System.out.println("IDE: " + ide);
+        System.out.println("Secret code: " +
+            Math.abs(ide.hashCode() % 10000));
+    }
+}
+
+1)
+int oneMillion = 1000000;
+int mystery = oneMillion * oneMillion;
+mystery = -727379968 (int)
+
+2)
+double unitPrice = 4.35;
+double totalPrice = 100 * unitPrice;
+totalPrice = 434.9999999994 (double)
+
+3)Arithmetic operations
+public class MathInJava
+{
+    /*
+       Computes the fraction
+
+           1
+      -----------
+           1 - s
+       s + -----
+             n
+
+      See http://en.wikipedia.org/wiki/Amdahl%27s_law
+    */
+    public double amdahlSpeedup(double s, double n)
+    {
+        // To do!
+        return 1/(s+(1-s)/n);
+    }
+
+    /*
+      Computes the fraction
+
+      (a - c)(b - d)
+      --------------
+      (b - c)(a - d)
+
+      See http://en.wikipedia.org/wiki/Cross-ratio
+    */
+    public double crossRatio(double a, double b, double c, double d)
+    {
+        // To do!
+        return ((a-c)*(b-d))/((b-c)*(a-d));
+    }
+
+    /**
+      Computes the average of four values.
+      @param a the first value
+      @param b the second value
+      @param c the third value
+      @param d the fourth value
+      @return the average of the four values
+    */
+    public double average(int a, int b, int c, int d)
+    {
+        // To do!
+        return (a+b+c+d)/4.0;
+    }
+}
+3.1)mathInJavaTester
+public class MathInJavaTester
+{
+    public static void main(String[] args)
+    {
+        MathInJava mathObj = new MathInJava();
+        System.out.println("amdahlSpeedup: ");
+        System.out.println("Actual:   " + mathObj.amdahlSpeedup(0.5, 4));
+        System.out.println("Expected: 1.6");
+        System.out.println("Actual:   " + mathObj.amdahlSpeedup(0.1, 9));
+        System.out.println("Expected: 5.0");
+
+        System.out.println("crossRatio: ");
+        System.out.println("Actual:   " + mathObj.crossRatio(1, 2, 3, 5));
+        System.out.println("Expected: 1.5");
+        System.out.println("Actual:   " + mathObj.crossRatio(1, 2, 4, 9));
+        System.out.println("Expected: 1.3125");
+
+        System.out.println("average: ");
+        System.out.println("Actual:   " + mathObj.average(3, 4, 5, 4));
+        System.out.println("Expected: 4");
+        System.out.println("Actual:   " + mathObj.average(3, 4, 3, 3));
+        System.out.println("Expected: 3.25");
+    }
+}
+
+4)COLOR REDUCTION
+public class Color
+{
+    private int red;
+    private int green;
+    private int blue;
+
+    /**
+     * Uses only six values for red, green, blue.
+     */
+    public void reduce()
+    {
+        red = (red * 6 /256) * 51;
+        green = (green *  6 /256) * 51;
+            blue =( blue * 6 /256) * 51;
+        // TODO: Change the values for red, green, and blue
+        // to one of the following: 0, 51, 102, 153, 204, 255
+    }
+
+    /**
+    *  Constructs a new Color object.
+    * @param red the red value of the color (between 0 and 255)
+    * @param green the green value of the color (between 0 and 255)
+    * @param blue the blue value of the color (between 0 and 255)
+    */
+    public Color(int red, int green, int blue)
+    {
+        this.red = red;
+        this.green = green;
+        this.blue = blue;
+    }
+
+    /**
+    *   Gets the red value of this color.
+    *   @return the red value (between 0 and 255)
+    */
+    public int getRed()
+    {
+        return red;
+    }
+
+    /**
+    *   Gets the green value of this color.
+    *   @return the green value (between 0 and 255)
+    */
+    public int getGreen()
+    {
+        return green;
+    }
+
+    /**
+    *   Gets the blue value of this color.
+    *   @return the blue value (between 0 and 255)
+    */
+    public int getBlue()
+    {
+        return blue;
+    }
+
+    // Color constants
+
+    public static final Color RED = new Color(255, 0, 0);
+    public static final Color GREEN = new Color(0, 255, 0);
+    public static final Color BLUE = new Color(0, 0, 255);
+    public static final Color WHITE = new Color(255, 255, 255);
+    public static final Color LIGHT_GRAY = new Color(192, 192, 192);
+    public static final Color GRAY = new Color(128, 128, 128);
+    public static final Color DARK_GRAY = new Color(64, 64, 64);
+    public static final Color BLACK = new Color(0, 0, 0);
+    public static final Color CYAN = new Color(0, 255, 255);
+    public static final Color MAGENTA = new Color(255, 0, 255);
+    public static final Color YELLOW = new Color(255, 255, 0);
+    public static final Color PINK = new Color(255, 175, 175);
+    public static final Color ORANGE = new Color(255, 200, 0);
+}
+
+5)CHECK BOARD
+public class CheckerBoardPainter
+{
+    /**
+     * Spaces are red if one of the coordinates is even and the other is odd
+     * Spaces are blue if both coordinates are even
+     * Spaces are blue if both coordinates are odd
+     * 
+     * @return 1 for red spaces and 0 for blue
+     * @param row the row of the space to paint
+     * @param col the column of the space to paint. 
+     */
+    public int getColor(int row, int col)
+    {
+        return (row % 2 + col % 2) % 2;
+    }
+}
+
+        6)GRAYSCALE
+public class Color
+{
+    private int red;
+    private int green;
+    private int blue;
+
+    /**
+     * Turns this color into the equivalent gray value.
+     */
+    public void turnGray()
+    {
+               int gray = (int)(0.2126 * red + 0.7152 * green + 0.0722 * blue);
+            red = gray ;
+        green = gray ;
+        blue = gray;
+        // TODO: Change this color to its equivalent gray value.
+        // The red, green, and blue variables should all be
+        // set to the gray level, which is computed as a weighted
+        // average of the original red, blue, and green levels.
+        // The weights (corresponding to the sensitivity of the
+        // cone cells in the human eye) are:
+        // red - 0.2126
+        // green - 0.7152
+        // blue - 0.0722
+
+    }
+
+    /**
+     * Constructs a new Color object.
+     * @param red the red value of the color (between 0 and 255)
+     * @param green the green value of the color (between 0 and 255)
+     * @param blue the blue value of the color (between 0 and 255)
+     */
+    public Color(int red, int green, int blue)
+    {
+        this.red = red;
+        this.green = green;
+        this.blue = blue;
+    }
+
+    /**
+     * Gets the red value of this color.
+     * @return the red value (between 0 and 255)
+     */
+    public int getRed()
+    {
+        return red;
+    }
+
+    /**
+     * Gets the green value of this color.
+     * @return the green value (between 0 and 255)
+     */
+    public int getGreen()
+    {
+        return green;
+    }
+
+    /**
+     * Gets the blue value of this color.
+     * @return the blue value (between 0 and 255)
+     */
+    public int getBlue()
+    {
+        return blue;
+    }
+
+    // Color constants
+
+    public static final Color RED = new Color(255, 0, 0);
+    public static final Color GREEN = new Color(0, 255, 0);
+    public static final Color BLUE = new Color(0, 0, 255);
+    public static final Color WHITE = new Color(255, 255, 255);
+    public static final Color LIGHT_GRAY = new Color(192, 192, 192);
+    public static final Color GRAY = new Color(128, 128, 128);
+    public static final Color DARK_GRAY = new Color(64, 64, 64);
+    public static final Color BLACK = new Color(0, 0, 0);
+    public static final Color CYAN = new Color(0, 255, 255);
+    public static final Color MAGENTA = new Color(255, 0, 255);
+    public static final Color YELLOW = new Color(255, 255, 0);
+    public static final Color PINK = new Color(255, 175, 175);
+    public static final Color ORANGE = new Color(255, 200, 0);
+}
+7)your own sunset effect
+public class Color
+{
+    private int red;
+    private int green;
+    private int blue;
+
+    /**
+     * Makes this color redder.
+     *@param addedRed the added amount of redness
+     */
+    public void redden(int addedRed) // TODO: Add a parameter
+    {
+       
+        int MAX_RED = 255;
+        red = Math.min(MAX_RED, red + addedRed);
+    }
+
+    /**
+     * Gets the red value of this color.
+     * @return the red value (between 0 and 255)
+     */
+    public int getRed()
+    {
+        return red;
+    }
+
+    /**
+     * Gets the green value of this color.
+     * @return the green value (between 0 and 255)
+     */
+    public int getGreen()
+    {
+        return green;
+    }
+
+    /**
+     * Gets the blue value of this color.
+     * @return the blue value (between 0 and 255)
+     */
+    public int getBlue()
+    {
+        return blue;
+    }
+
+    /**
+     * Constructs a new Color object.
+     * @param red the red value of the color (between 0 and 255)
+     * @param green the green value of the color (between 0 and 255)
+     * @param blue the blue value of the color (between 0 and 255)
+     */
+    public Color(int red, int green, int blue)
+    {
+        this.red = red;
+        this.green = green;
+        this.blue = blue;
+    }
+
+    // Color constants
+
+    public static final Color RED = new Color(255, 0, 0);
+    public static final Color GREEN = new Color(0, 255, 0);
+    public static final Color BLUE = new Color(0, 0, 255);
+    public static final Color WHITE = new Color(255, 255, 255);
+    public static final Color LIGHT_GRAY = new Color(192, 192, 192);
+    public static final Color GRAY = new Color(128, 128, 128);
+    public static final Color DARK_GRAY = new Color(64, 64, 64);
+    public static final Color BLACK = new Color(0, 0, 0);
+    public static final Color CYAN = new Color(0, 255, 255);
+    public static final Color MAGENTA = new Color(255, 0, 255);
+    public static final Color YELLOW = new Color(255, 255, 0);
+    public static final Color PINK = new Color(255, 175, 175);
+    public static final Color ORANGE = new Color(255, 200, 0);
+}
+MAIN METHOD:
+import java.util.Scanner;
+
+public class Sunset
+{
+    public static void main(String[] args)
+    {
+        Picture pic = new Picture("queen-mary.png");
+        pic.draw();
+        
+        
+        // TODO: Read added redness from scanner
+        Scanner in =new Scanner(System.in);
+        System.out.print("Added redness: ");
+        int addedRed = in.nextInt();
+
+        for (int i = 0; i < pic.pixels(); i++)
+        {
+            Color c = pic.getColorAt(i);
+          c.redden(addedRed);   // TODO: Pass added redness to method
+            pic.setColorAt(i, c);
+        }
+    }
+}
+
+8.formatting output
+public class MicroKitchenTable
+{
+    public static void main(String[] args)
+    {
+        int saraCookiesPerDay = 3;
+        double saraCerealPerDay = .06;
+        String saraName = "Sara";
+        int cayCookiesPerDay = 1;
+        double cayCerealPerDay = 0;
+        String cayName = "Cay";
+        System.out.println("cookies | cereal | name");
+        System.out.println("------------------------");
+        System.out.printf("%8d|%8.2f|%s", saraCookiesPerDay, saraCerealPerDay, saraName);
+        System.out.println();
+        System.out.printf("%8d|%8.2f|%s", cayCookiesPerDay, cayCerealPerDay, cayName);
+        System.out.println();
+        // TODO: Print entries for Sara
+        // Be sure to line up the entries in the columns using printf
+        // Print floating-point numbers with two digits after the decimal point
+
+        // TODO: Print entries for Cay
+
+    }
+}
+
+
