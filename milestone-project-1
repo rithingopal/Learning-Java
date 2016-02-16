@@ -1,0 +1,28 @@
+hello,
+project:blackjack 
+
+Project Description: This project took me a while to understand the possible ways to create and the basic game rules which we need to implement
+and make the cases run according to the game play . I have takes some references from the internet and tried to accomplish this far.
+The basic structure of this project I have created 
+1.classes for Cards, Deck, Suit,Players and main-method GameRunner.
+
+2.Card Class:an implementation of card type.i have given mySuit and myNumber which represents my card numbers and suit.
+created methods and used switch statement to create numbers of card that we give from 1-10 & jack,queen,king,ace.
+
+3.Suit Class: this class describes the type of symbols  used on cards.I used emum command to represent a fixed set of constants.
+clubs,Diamonds,spades,Hearts.
+
+4.Deck class:An implementation of Deck of cards,I used "import java.util.Random" because we use Deck shuffling .I gave number of cards by using 
+numCards to specify number of cards which i use.I created a constructor that defines the number of decks(i.e how many sets of 52 cards are
+in the deck) whether is should be shuffled.
+
+5.Player class.Implements of a blackjack players.describes player name ,cards in player current hand. method to see sum of cards in player's hand
+to caliculate each card's contribution to hand sum.
+
+6.GameRunner : implements the main method and uses commands like scanner.initiate the player objects,print intial hands.used boolean method to flags for when each player is finished hitting
+players turn and dealer turn and print final hands who ever sum is greater that21 is the winner.
+
+Problems Faced:
+in main method how to add the players hits and initiating player objects i have taken the reference and 
+i had accomplished with the technque with basic algorithm used in the main method and set handSum with cardNum.
+even in the deck class i have learned how to implement the numToCards to the deck how to printdeck .
